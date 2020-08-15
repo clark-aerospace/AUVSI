@@ -1,2 +1,12 @@
 git submodule add https://github.com/auvsi-suas/interop.git interop
 move auvsi_system into repo
+add Django and django-jsonify
+build interop
+
+
+
+
+git clone https://github.com/aikiframework/json.git --recursive
+
+
+
