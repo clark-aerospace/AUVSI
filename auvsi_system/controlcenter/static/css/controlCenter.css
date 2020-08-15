@@ -1,0 +1,32 @@
+#logo img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+
+/* cards content */
+.container{
+    margin-top: 8em;
+    font-family: 'Lato', sans-serif;
+}
+
+.bg-primary {
+    background-color: #262c39 !important;;
+}
+.card-body {
+    background: #ededf1;
+    color:black;
+}
+a{
+    color:#fff;
+    text-align: center;
+    font-size: 21px;
+}
+
+a:hover{
+    color: #ee8565;
+    text-decoration: none;
+}
+/* end of card content */

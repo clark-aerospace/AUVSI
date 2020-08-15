@@ -1,0 +1,30 @@
+
+
+
+
+
+.cntainer, h2{
+    color: #34468b;
+}
+
+
+/*  Data boards */
+
+.container{
+    margin-top: 5em;
+}
+
+.list-group{
+    min-width: 17em;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-bottom: .5em;
+    margin-bottom: .5em;
+    font-weight: 500;
+    font-size: 1.125em;
+}
+
+.shift-right{
+    padding-left: 2.5em;
+}
+/* end of data boards */

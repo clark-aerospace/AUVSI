@@ -1,0 +1,36 @@
+body{
+    background-color: #376bbe;
+  }
+
+header{
+    display: block;
+    font-family: OpenSans-Regular;
+    font-size: 100px;
+    color:#f5b450;
+    line-height: 1.2;
+    text-align: center;
+    margin-top:50px;
+    margin-bottom: 100px;
+} /* end of header */
+
+/* Form container */
+#container {
+    border-radius: 10px;
+    padding: 20px; 
+    width: 450px;
+    height: 450px;
+    margin: auto; 
+    background: #fff;
+  }
+#container span{
+    display: block;
+    font-family: OpenSans-Regular;
+    font-size: 30px;
+    color:#555555;
+    line-height: 1.2;
+    text-align: center;
+    margin-top:25px;
+}/* end of Form container  */
+
+
+

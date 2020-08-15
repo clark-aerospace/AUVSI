@@ -1,0 +1,90 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Main Stylesheet File -->
+    <link href="{% static  'css/controlCenter.css' %}" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
+    <title>Control Center</title>
+  </head>
+  <body>
+    <div id="logo">
+        <img src="{% static "img/aerospace_logo.jpg" %}" alt="logo">
+    </div>
+    <form method="POST">
+      {% csrf_token %}
+      <input type="submit" name="flush_data" id="flush_data" value="flush">
+  </form>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <!-- GET Mission -->
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+          <a href="{% url 'mission' %}">
+          <div class="card-header">Request Mission</div>
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">Includes:</h5>
+            <ul>
+              <li>Max Altitude</li>
+              <li>Min Altitude</li>
+              <li>Way Points</li>
+              <li>Boundary Points</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <!-- Update Mission -->
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+          <a href="#">
+          <div class="card-header">Upload Coordinates</div>
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">Includes:</h5>
+            <ul>
+              <li>Succesful Uploads</li>
+              <li>Drone telemetry</li>
+              <li> --------------</li>
+              <li> --------------</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <!-- Plan Mission -->
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+          <a href="#">
+            <a href="{% url 'completeMap' %}">
+              <div class="card-header">Plan mission</div>
+            </a>
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">Includes:</h5>
+            <ul>
+              <li>Boundary Grid</li>
+              <li>Way Points Grid</li>
+              <li>Search Grid</li>
+              <li>Complete Grid</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
