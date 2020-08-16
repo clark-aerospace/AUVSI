@@ -1,13 +1,15 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
+from google.protobuf.json_format import MessageToJson
 from .forms import InteropServerForm, MainPageForm
 from .models import InteropServer
 from .connect import connect
 from .parseJson import ParseJsonFile
-import json
-import math
 import sys
 import os
+import json
+import math
+
 
 
 sys.path.insert(1, "/interop/client")
@@ -51,20 +53,8 @@ def getMission(request):
 
     mission = auvsi_client.get_mission(1)
     with open('controlcenter/mission_file.json', 'w') as mission_file:
-        mission_file.write(mission)
+        mission_file.write(MessageToJson(mission))
 
-
-    '''mission_obj = {}
-    mission_obj['id'] = mission.id
-    mission_obj['lostCommsPos'] = mission.lost_comms_pos
-    mission_obj['flyZones'] = mission.fly_zones
-    mission_obj['waypoints'] = mission.waypoints
-    mission_obj['searchGridPoints'] = mission.search_grid_points
-    mission_obj['stationaryObstacles'] = mission.stationary_obstacles
-    print(str(mission_obj))
-    with open('text.json', 'w') as outfile:
-        outfile.write(json.load(str(mission_obj)))'''
- 
     mission_file = ParseJsonFile(os.getcwd() + '/controlcenter/mission_file.json')
     maxAltitude = mission_file.altitudeMax
     minAltitude = mission_file.altitudeMin
