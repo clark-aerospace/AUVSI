@@ -46,7 +46,7 @@ git clone https://github.com/munikeraragon/AUVSI --recursive
 
 2) cd interop/server
 ```sh
-cd interop/server
+cd AUVSI/interop/server
 ```
 
 3) Create the interop server's database.
@@ -67,7 +67,7 @@ sudo ./interop-server.sh load_test_data
 #### Start shell
 1) Change into the client subdirectory of the Git repo.
 ```sh
-cd interop/server
+cd AUVSI/interop/server
 ```
 2) Run the interop server on port 8000. The server will run until stopped using `Ctrl-C`.
 ```sh
@@ -78,7 +78,7 @@ sudo ./interop-server.sh up
 #### Start shell
 1) Change into the client subdirectory of the Git repo.
 ```sh
-cd /interop/client
+cd AUVSI/interop/client
 ```
 2) Run the Docker container.
 ```sh
@@ -86,11 +86,11 @@ sudo ./interop-client.sh run
 ```
 3) Change into the auvsi_system subdirectory of the Git repo.
 ```sh
-cd /interop/auvsi_system
+cd AUVSI/interop/auvsi_system
 ```
-3) Run the AUVSI interface system.
+3) Run the AUVSI interface system on port 5000. The app will run until stopped using `Ctrl-C`. 
 ```sh
-python manage.py runserver
+python manage.py runserver 0.0.0.0:5000
 ```
 
 
