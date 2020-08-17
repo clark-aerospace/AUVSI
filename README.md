@@ -1,12 +1,12 @@
 # auvsi_system
-Ground control application that will be used to compete in the AUVSI autonoums dron competition.
+Ground control application that will be used to compete in the AUVSI autonomous drone competition.
 
 ![Docker Image CI](https://github.com/anselm94/googlekeepclone/workflows/Docker%20Image%20CI/badge.svg)
 
 
 <div align="center">
-![Home page demo](./docs/img/home_page.png)
 
+![Home page demo](docs/img/app.png)
 </div>
 
 
