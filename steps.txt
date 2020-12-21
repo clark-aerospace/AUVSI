@@ -1,12 +1,8 @@
-git submodule add https://github.com/auvsi-suas/interop.git interop
-move auvsi_system into repo
-add Django and django-jsonify
-build interop
+1) run build.sh script
 
+2) adjust interop/client/interop-client.sh 
+docker run --net=host --interactive -v ${AUVSI}/auvsi_system:/interop/auvsi_system --tty auvsisuas/interop-client
 
-
-
-git clone https://github.com/aikiframework/json.git --recursive
-
+3) add Google maps authentication id+key
 
 
