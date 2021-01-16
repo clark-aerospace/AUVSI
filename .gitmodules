@@ -1,3 +1,6 @@
 [submodule "interop"]
 	path = interop
 	url = https://github.com/auvsi-suas/interop.git
+[submodule "auvsi_system/path_planner"]
+	path = auvsi_system/path_planner
+	url = https://github.com/munikeraragon/path_planner.git
