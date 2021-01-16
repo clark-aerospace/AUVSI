@@ -82,12 +82,18 @@ cd AUVSI/interop/client
 ```
 2) Run the Docker container.
 ```sh
-sudo ./interop-client.sh run
+sudo docker run --net=host --interactive -v $(cd ../.. && pwd)/auvsi_system:/interop/auvsi_system --tty auvsisuas/interop-client
+
 ```
 3) Change into the auvsi_system subdirectory of the Git repo.
 ```sh
-cd AUVSI/interop/auvsi_system
+cd /interop/auvsi_system
 ```
+4) Install system requirements
+```sh
+sudo bash install.sh
+```
+
 3) Run the AUVSI interface system on port 5000. The app will run until stopped using `Ctrl-C`. 
 ```sh
 python manage.py runserver 0.0.0.0:5000
