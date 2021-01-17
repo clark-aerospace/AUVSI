@@ -10,7 +10,10 @@ import os
 import json
 import math
 
-
+from path_planner.simulator.simulator import Simulator
+from path_planner.loader.loader import Loader
+from path_planner.algorithms.astar.multithread import Astar as AstarAsync
+from path_planner.algorithms.dijkstra.multithread import Dijkstra as DijkstraAsync
 
 sys.path.insert(1, "/interop/client")
 from auvsi_suas.client import client
@@ -52,10 +55,10 @@ def getMission(request):
                        password='testpass')
 
     mission = auvsi_client.get_mission(1)
-    with open('controlcenter/mission_file.json', 'w') as mission_file:
+    with open('controlcenter/missions/mission_file.json', 'w') as mission_file:
         mission_file.write(MessageToJson(mission))
 
-    mission_file = ParseJsonFile(os.getcwd() + '/controlcenter/mission_file.json')
+    mission_file = ParseJsonFile(os.getcwd() + '/controlcenter/missions/mission_file.json')
     maxAltitude = mission_file.altitudeMax
     minAltitude = mission_file.altitudeMin
     wayPointsDict = constructDict(mission_file.wayPointsList, 3)
@@ -79,19 +82,57 @@ def constructDict(list, columns):
         dict[i] = row
     return dict
 
+def plan_mission(request):    
+    return render(request, 'controlcenter/planMission.html')
+    
+def run_dijkstra(request):
+    mission_file = os.getcwd() + '/controlcenter/missions/mission_file.json'
+    plan_file = os.getcwd() + '/controlcenter/planning/dijkstra_planning.json'
 
+    loader = Loader(mission_file, cartesian=False)
+    algo = DijkstraAsync(loader)
+    simulator = Simulator(loader)
+
+    coordinates = simulator.simulate(algo, headless=True)
+    print(coordinates)
+
+    mission = ParseJsonFile(mission_file).jsonFile,
+    plan = ParseJsonFile.create_waypoints(plan_file, coordinates)
+
+
+    return render(request,'controlcenter/dijkstraMap.html',{'mission': mission[0], 'plan': plan})
+
+def run_astar(request):
+    mission_file = os.getcwd() + '/controlcenter/missions/mission_file.json'
+    plan_file = os.getcwd() + '/controlcenter/planning/astar_planning.json'
+
+    loader = Loader(mission_file, cartesian=False)
+    algo = AstarAsync(loader)
+    simulator = Simulator(loader)
+
+    coordinates = simulator.simulate(algo, headless=True)
+    print(coordinates)
+
+    mission = ParseJsonFile(mission_file).jsonFile,
+    plan = ParseJsonFile.create_waypoints(plan_file, coordinates)
+
+
+    return render(request,'controlcenter/astarMap.html',{'mission': mission[0], 'plan': plan})
+
+
+# this calls could look into the planning folder and determine if another alogorithim is ready for plotting
 def boundaryGrid(request):
-    mission_file = ParseJsonFile(os.getcwd() + '/controlcenter/mission_file.json')
+    mission_file = ParseJsonFile(os.getcwd() + '/controlcenter/missions/mission_file.json')
     return render(request,'controlcenter/boundaryGrid.html',{'mission':mission_file.jsonFile})
 
 def wayPointsGrid(request):
-    mission_file = ParseJsonFile(os.getcwd() + '/controlcenter/mission_file.json')
+    mission_file = ParseJsonFile(os.getcwd() + '/controlcenter/missions/mission_file.json')
     return render(request,'controlcenter/wayPointsGrid.html',{'mission':mission_file.jsonFile})
 
 def completeMap(request):
-    mission_file = ParseJsonFile(os.getcwd() + '/controlcenter/mission_file.json')
+    mission_file = ParseJsonFile(os.getcwd() + '/controlcenter/missions/mission_file.json')
     return render(request,'controlcenter/completeMap.html',{'mission':mission_file.jsonFile})
 
 def searchGrid(request):
-    mission_file = ParseJsonFile(os.getcwd() + '/controlcenter/mission_file.json')
+    mission_file = ParseJsonFile(os.getcwd() + '/controlcenter/missions/mission_file.json')
     return render(request,'controlcenter/searchGrid.html',{'mission':mission_file.jsonFile})

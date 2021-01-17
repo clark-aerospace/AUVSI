@@ -15,21 +15,14 @@
     <title>Control Center</title>
   </head>
   <body>
-    <div id="logo">
-        <img src="{% static "img/aerospace_logo.jpg" %}" alt="logo">
-    </div>
-    <form method="POST">
-      {% csrf_token %}
-      <input type="submit" name="flush_data" id="flush_data" value="flush">
-  </form>
 
   <div class="container">
     <div class="row">
       <div class="col-sm">
-        <!-- GET Mission -->
+        <!-- Run djikstra algorithim -->
         <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-          <a href="{% url 'mission' %}">
-          <div class="card-header">Request Mission</div>
+          <a href="{% url 'runDijkstra' %}">
+          <div class="card-header">Run Djikstra</div>
           </a>
           <div class="card-body">
             <h5 class="card-title">Includes:</h5>
@@ -43,10 +36,10 @@
         </div>
       </div>
       <div class="col-sm">
-        <!-- Update Mission -->
+        <!-- Run astar algorithim -->
         <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-          <a href="#">
-          <div class="card-header">Upload Coordinates</div>
+          <a href="{% url 'runAstar' %}">
+          <div class="card-header">Run Astar</div>
           </a>
           <div class="card-body">
             <h5 class="card-title">Includes:</h5>
@@ -60,29 +53,12 @@
         </div>
       </div>
       <div class="col-sm">
-        <!-- Plan Mission -->
+        <!-- Run some other algo -->
         <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
           <a href="#">
-            <a href="{% url 'planMission' %}">
-              <div class="card-header">Plan mission</div>
+            <a href="{% url 'runAstar' %}">
+              <div class="card-header">Run some other algo</div>
             </a>
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">Includes:</h5>
-            <ul>
-              <li>Run Djikstra</li>
-              <li>Run Astar</li>
-              <li>Run -----</li>
-              <li>RUN -----</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm">
-        <!-- See Mission -->
-        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-          <a href="{% url 'completeMap' %}">
-          <div class="card-header">See Mission</div>
           </a>
           <div class="card-body">
             <h5 class="card-title">Includes:</h5>
@@ -95,6 +71,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 

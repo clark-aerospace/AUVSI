@@ -33,4 +33,19 @@ class ParseJsonFile:
     def getWayPointList(self):
         self.wayPointsList = self.jsonFile['waypoints']
         return self.wayPointsList
+    
+    @staticmethod
+    def create_waypoints(path, coordinates):
+        points = []
+
+        for coord in coordinates:
+            points += [{"longitude": coord[0], "latitude": coord[1]}]
+        
+        data = {"waypoints": points}
+
+        with open(path, 'w') as f:
+            f.write(json.dumps(data, indent = 2))
+        
+        return  data
+
 
