@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo "Installing dependencies"
-apt install python3-matplotlib -y
-apt install python3-mpltoolkits.basemap -y
+pip install mavsdk
+pip install --upgrade matplotlib
+apt install libgeos-dev -y
+pip install https://github.com/matplotlib/basemap/archive/master.zip
 apt-get install proj-bin -y
-pip3 install mavsdk

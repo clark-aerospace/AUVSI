@@ -7,7 +7,7 @@
 export function createCompleteMap(missionFile) {
   // Create the script tag, set the appropriate attributes
   var script = document.createElement('script');
-  script.src = 
+  script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAHNDXWm7aUesCVL4twcs0a30ABQZpIb2A&callback=initMap';
   script.defer = true;
   script.async = true;
 
