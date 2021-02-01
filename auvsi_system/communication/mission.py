@@ -22,16 +22,27 @@ async def run():
     running_tasks = [print_mission_progress_task]
     termination_task = asyncio.ensure_future(observe_is_in_air(drone, running_tasks))
 
+    # Reconfigure this line to parse mission file that has been run through the
+    # path planning algorithm
     jsonFile = ParseJsonFile('text.json')
     wayPointList = jsonFile.getWayPointList()
+
+    # Need to also parse mission fence, obstacles and drop zone submission
+
     print(wayPointList)
     print('len of mission: ' + str(len(WayPointsMission(wayPointList))))
     mission_plan = MissionPlan(WayPointsMission(wayPointList))
 
     await drone.mission.set_return_to_launch_after_mission(True)
 
+
     print("-- Uploading mission")
     await drone.mission.upload_mission(mission_plan)
+
+'''
+    This will be removed as intent of the program is to only upload planned
+    missions to the aircraft. Primary operation of the UAV will be performed
+    from QGroundControl, not from another piece of software.
 
     print("-- Arming")
     await drone.action.arm()
@@ -40,7 +51,6 @@ async def run():
     await drone.mission.start_mission()
 
     await termination_task
-
 
 async def print_mission_progress(drone):
     async for mission_progress in drone.mission.mission_progress():
@@ -69,6 +79,7 @@ async def observe_is_in_air(drone, running_tasks):
             await asyncio.get_event_loop().shutdown_asyncgens()
 
             return
+'''
 
 
 if __name__ == "__main__":
