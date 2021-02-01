@@ -99,7 +99,7 @@ cd /interop/auvsi_system
 ```
 4) Install system requirements
 ```sh
-sudo bash install.sh
+./install.sh
 ```
 
 3) Run the AUVSI interface system on port 5000. The app will run until stopped using `Ctrl-C`. 
