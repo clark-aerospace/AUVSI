@@ -4,9 +4,8 @@ import asyncio
 import os
 
 from mavsdk import System
-from mavsdk.mission import (MissionItem, MissionPlan)
 from parseJson import ParseJsonFile
-from MissionItemList import WayPointsMission
+from MissionItemList import RawWayPointsMission
 
 async def run():
     drone = System()
@@ -32,15 +31,26 @@ async def run():
     # Either the planned mission needs this data present or a seperate file
     # containing the relevant data needs to be opened
 
+    print('-- Getting home position')
+    home = {'latitude': 0.0, 'longitude': 0.0, 'altitude': 0.0}
+    async for home_position in drone.telemetry.home():
+        home['latitude'] = home_position.latitude_deg
+        home['longitude'] = home_position.longitude_deg
+        home['altitude'] = home_position.relative_altitude_m
+        break
+    
+    wayPointList.append(home)
+
     print(wayPointList)
-    print('len of mission: ' + str(len(WayPointsMission(wayPointList))))
-    mission_plan = MissionPlan(WayPointsMission(wayPointList))
+
+    mission_plan = RawWayPointsMission(wayPointList)
+    print('len of mission: ' + str(len(mission_plan)))
 
     await drone.mission.set_return_to_launch_after_mission(True)
 
 
     print("-- Uploading mission")
-    await drone.mission.upload_mission(mission_plan)
+    await drone.mission_raw.upload_mission(mission_plan)
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
