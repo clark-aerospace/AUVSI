@@ -21,10 +21,30 @@ class ParseJsonFile:
         self.altitudeMin = self.flyZoneDictionary['altitudeMin']
         return self.altitudeMin
 
-    def getBoundaryPointList(self, index):
-        self.boundaryPointsList = self.flyZoneDictionary['boundaryPoints']  # size of list can vary
-        return self.boundaryPointsList[index]
+    def getBoundaryPointList(self):
+        self.boundaryPointsList = self.flyZoneDictionary['boundaryPoints']
+        return self.boundaryPointsList
     
     def getWayPointList(self):
         self.wayPointsList = self.jsonFile['waypoints']
         return self.wayPointsList
+
+    def getObstacleList(self):
+        self.obstacleList = self.jsonFile['stationaryObstacles']
+        return self.obstacleList
+
+    def getAirDropPosition(self):
+        self.airDropPosition = self.jsonFile['airDropPos']
+        return self.airDropPosition
+    
+    def getAirDropBoundaryPoints(self):
+        self.airDropBoundaryPoints = self.jsonFile['airDropBoundaryPoints']
+        return self.airDropBoundaryPoints
+
+    def getUGVDrivePosition(self):
+        self.ugvDrivePosition = self.jsonFile['ugvDrivePos']
+        return self.ugvDrivePosition
+
+    def getSearchGrid(self):
+        self.searchGrid = self.jsonFile['searchGridPoints']
+        return self.searchGrid

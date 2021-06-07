@@ -3,23 +3,20 @@
 import asyncio
 import os
 
-from Mission import MissionPlan
+#from VehicleInfo import SystemInfo
+from Mission import Mission
 from mavsdk import System
 
 async def run():
+    droneAddress = "udp://:14540"
     drone = System()
-    await drone.connect(system_address="udp://:14540")
-
+    await drone.connect(system_address = droneAddress)
+   
     print("Waiting for drone to connect...")
     async for state in drone.core.connection_state():
         if state.is_connected:
             print(f"Drone discovered with UUID: {state.uuid}")
             break
-
-    # Set path to planned mission directory
-    #curr_path = os.path.dirname(__file__)
-    #planned_mission_path = os.path.relpath('../controlcenter/planning/', curr_path)
-    #print("Planned Mission Path: " + str(planned_mission_path))
 
     print('-- Getting home position')
     # Initialize dictionary to hold home postion
@@ -31,18 +28,17 @@ async def run():
         home['longitude'] = home_position.longitude_deg
         home['altitude'] = home_position.relative_altitude_m
         break
-    
-    current_mission = MissionPlan('text.json', home)
 
-    await drone.mission.set_return_to_launch_after_mission(True)
+    current_mission = Mission('test_mission.json', home)
 
     # Upload raw mission command list to drone
     print("-- Uploading mission")
-    await drone.mission_raw.upload_mission(current_mission.getMissionRawWaypoints())
+    await drone.mission_raw.upload_mission(current_mission.getMissionWaypoints())
 
     # Upload boundary fence polygon to drone
-    print("-- Uploading boundary fence")
-    await drone.geofence.upload_geofence(current_mission.getMissionGeofence())
+    print("-- Uploading boundary fence + obstalces")
+    fenceList = current_mission.getMissionGeofence() + current_mission.getMissionObstacles()    
+    await drone.geofence.upload_geofence(fenceList)
 
     print("-- Uploads complete")
 
